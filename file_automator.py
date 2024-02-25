@@ -2,112 +2,68 @@ import os
 import pathlib
 from typing import List
 
-image_extensions = ['.apng', '.avif', '.gif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
+
+def group_files(folder_to_look, sub_folder_to_store_grouped_files, file_extensions_to_group):
+    all_files = os.listdir(folder_to_look)
+    for file in all_files:
+        if is_desired_file_type(file, file_extensions_to_group):
+            create_folder_if_not_exists(folder_to_look=folder_to_look,
+                                        sub_folder_to_store_grouped_files=sub_folder_to_store_grouped_files)
+            os.rename(f"{folder_to_look}/{file}", f"{folder_to_look}/{sub_folder_to_store_grouped_files}/{file}")
+
+
+def create_folder_if_not_exists(folder_to_look, sub_folder_to_store_grouped_files):
+    os.path.isdir(f"{folder_to_look}/{sub_folder_to_store_grouped_files}") or os.mkdir(
+        f"{folder_to_look}/{sub_folder_to_store_grouped_files}")
 
 
 def is_desired_file_type(file, desired_file_types: List[str]):
     return pathlib.Path(file).suffix in desired_file_types
 
 
-def create_folder_if_not_exists(base_folder, sub_folder):
-    os.path.isdir(f"{base_folder}/{sub_folder}") or os.mkdir(f"{base_folder}/{sub_folder}")
-
-
-def group_image_files(folder='./Desktop'):
-    base_folder = folder
-    images_folder = 'images'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, image_extensions):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=images_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{images_folder}/{file}")
-
-
-def group_pdf_files(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'pdfs'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, [".pdf"]):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_text_files(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'texts'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, [".txt"]):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_excel_and_csv_files(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'excel_and_csvs'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, ['.xls', '.xlsx', '.csv']):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_docxs(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'docxs'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, ['.doc', '.docx']):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_shortcuts(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'shortcuts'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, ['.lnk']):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_py_ipynbs(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'py_ipynbs'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, ['.py', '.ipynb']):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
-def group_executables(folder='./Desktop'):
-    base_folder = folder
-    pdf_folder = 'executables'
-
-    all_files = os.listdir(folder)
-    for file in all_files:
-        if is_desired_file_type(file, ['.exe', '.msi']):
-            create_folder_if_not_exists(base_folder=base_folder, sub_folder=pdf_folder)
-            os.rename(f"{folder}/{file}", f"{base_folder}/{pdf_folder}/{file}")
-
-
 if __name__ == "__main__":
-    # group_image_files()
-    # group_pdf_files()
-    # group_text_files()
-    # group_excel_and_csv_files()
-    # group_docxs()
-    group_shortcuts()
-    group_py_ipynbs()
-    group_executables()
-    print(os.listdir("./Desktop"))
+    base_folder = "./Desktop"  # change this depending on the location
+
+    sub_folder = 'Images'
+    extensions = ['.apng', '.avif', '.gif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'PDFs'
+    extensions = [".pdf"]
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Texts'
+    extensions = [".txt"]
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Excel_and_CSVs'
+    extensions = ['.xls', '.xlsx', '.csv']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Word Docs'
+    extensions = ['.doc', '.docx']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Shortcuts'
+    extensions = ['.lnk']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Py_IPYNBs'
+    extensions = ['.py', '.ipynb']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Executables'
+    extensions = ['.exe', '.msi']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Tableau Workbooks'
+    extensions = ['.twb']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'Log Files'
+    extensions = ['.log']
+    group_files(base_folder, sub_folder, extensions)
+
+    sub_folder = 'SSH Key Pairs'
+    extensions = ['.pem']
+    group_files(base_folder, sub_folder, extensions)
