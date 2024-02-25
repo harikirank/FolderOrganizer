@@ -7,8 +7,7 @@ This script is designed to efficiently declutter any specified folder, such as t
 
 ## Demo
 
-https://raw.githubusercontent.com/harikirank/FolderOrganizer/main/VideoDemonstration.mp4
-
+<video src='VideoDemonstration.mp4' width=180></video>
 
 ## Installation
 
