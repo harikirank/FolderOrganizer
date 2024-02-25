@@ -5,9 +5,12 @@ This script is designed to efficiently declutter any specified folder, such as t
 
 
 
-## Demo
 
-<video src='VideoDemonstration.mp4' width=180></video>
+
+
+
+## Demo
+https://github.com/harikirank/FolderOrganizer/assets/58730670/8edc3321-b2eb-45f9-95ca-8bd116deb25a
 
 ## Installation
 
