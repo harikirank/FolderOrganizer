@@ -3,9 +3,17 @@ import pathlib
 from typing import List
 
 
+def exclude_source_file_from_being_grouped(file):
+    return file == "file_automator.py"
+
+
 def group_files(folder_to_look, sub_folder_to_store_grouped_files, file_extensions_to_group):
     all_files = os.listdir(folder_to_look)
     for file in all_files:
+        # Exclude the source file itself from being
+        if exclude_source_file_from_being_grouped(file):
+            continue
+
         if is_desired_file_type(file, file_extensions_to_group):
             create_folder_if_not_exists(folder_to_look=folder_to_look,
                                         sub_folder_to_store_grouped_files=sub_folder_to_store_grouped_files)
@@ -22,7 +30,8 @@ def is_desired_file_type(file, desired_file_types: List[str]):
 
 
 if __name__ == "__main__":
-    base_folder = "./Desktop"  # change this depending on the location
+    # change this depending on the location
+    base_folder = "."
 
     sub_folder = 'Images'
     extensions = ['.apng', '.avif', '.gif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
