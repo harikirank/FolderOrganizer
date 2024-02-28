@@ -1,8 +1,7 @@
 
 # FolderOrganizer
 
-This script is designed to efficiently declutter any specified folder, such as the Desktop, by organizing accumulated files. It is universally applicable across different folders without the need for modifications or installations, offering a versatile solution for maintaining an organized digital workspace.
-
+Essentially, This script is designed to easily organize files in any specified folder, such as the Desktop, by neatly arranging them into their file specific folders. You can run the script on any folder you wish and it will work like a charm!
 
 
 
